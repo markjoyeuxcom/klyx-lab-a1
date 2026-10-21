@@ -4,6 +4,7 @@ metadata:
   name: web
   labels:
     app: web
+    release: two
 spec:
   replicas: 2
   # a pod counts as available only after 15 s ready: one that crashes at
@@ -26,7 +27,7 @@ spec:
             - 'if [ "$MODE" = "crash" ]; then echo "fatal: mode $MODE is not one web supports" >&2; exit 1; fi; echo "web started in mode $MODE"; while true; do sleep 3600; done'
           env:
             - name: MODE
-              value: steady
+              value: crash
           resources:
             requests:
               cpu: 10m
